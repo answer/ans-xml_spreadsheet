@@ -74,7 +74,11 @@ data.to_xml_spreadsheet(
 ```ruby
 doc = Ans::XmlSpreadsheet.new
 doc.author = "admin"
-doc.insert_header = false
+doc.default_data_type = "String"
+doc.default_cell_width = 100
+doc.default_insert_title_row = false
+doc.sheet_name_generator = ->(index){"sheet#{index+1}"}
+
 doc.push(
   data,
   sheet_name: "sheet1"
@@ -82,6 +86,10 @@ doc.push(
   decorator: MyDecorator,
   columns: [...],
 )
+doc.push(
+  ...
+)
+
 doc.to_xml_spreadsheet
 ```
 
@@ -92,10 +100,11 @@ doc.to_xml_spreadsheet
 ```ruby
 # initializer
 Ans::XmlSpreadsheet.configure do |config|
-  config.author = "admin"
+  config.default_author = "admin"
   config.default_data_type = "String"
   config.default_cell_width = 100
   config.default_insert_title_row = false
+  config.sheet_name_generator = ->(index){"sheet#{index+1}"}
 end
 ```
 
