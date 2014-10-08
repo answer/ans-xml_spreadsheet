@@ -14,7 +14,7 @@ module Ans
       config.default_sheet_name_generator = ->(index){"sheet#{index+1}"}
     end
 
-    def self.add_xls_mime_type!(format: :xls)
+    def self.add_ms_excel_mime_type!(format: :xls)
       Mime::Type.register "application/vnd.ms-excel", format
     end
 
